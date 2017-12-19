@@ -1,0 +1,60 @@
+<message name="getEmployeeDetailsRequest">
+<part name="empId" type="xsd:integer"/>
+</message>
+
+
+
+<message name="getEmployeeDetailsResponse">
+<part name="empId" type="xsd:integer"/>
+<part name="empFirstName" type="xsd:string"/>
+<part name="empLastName" type="xsd:string"/>
+<part name="empRole" type="xsd:string"/>
+<part name="empDepartment" type="xsd:string"/>
+</message>
+
+
+
+<portType name="Employee_PortType">
+<operation name="getEmployeeDetails">
+<input message="tns:getEmployeeDetailsRequest"/>
+<output message="tns:getEmployeeDetailsResponse"/>
+</operation>
+</portType>
+
+
+
+<binding name="Employee_Binding" type="tns:Employee_PortType">
+<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+<operation name="getEmployeeDetails">
+<soap:operation soapAction="getEmployeeDetails"/>
+
+<input>
+<soap:body
+encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+namespace="urn:examples:employee"
+use="encoded"/>
+</input>
+
+<output>
+<soap:body
+encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+namespace="urn:examples:employee"
+use="encoded"/>
+</output>
+
+</operation>
+</binding>
+
+
+
+
+<service name="Employee_Service">
+<documentation>WSDL File for EmployeeService</documentation>
+<port binding="tns:Employee_Binding" name="Employee_Port">
+<soap:address
+location="http://localhost:3030/employeedetails/" />
+</port>
+</service>
+
+
+
