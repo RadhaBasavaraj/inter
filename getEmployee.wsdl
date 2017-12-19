@@ -1,0 +1,65 @@
+<definitions name="getEmployee"
+targetNamespace="http://www.examples.com/wsdl/getEmployee.wsdl"
+xmlns="http://schemas.xmlsoap.org/wsdl/"
+xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+xmlns:tns="http://www.examples.com/wsdl/getEmployee.wsdl"
+xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+
+<message name="getEmployeeRequest">
+<part name="empKey" type="xsd:integer"/>
+</message>
+
+
+
+<message name="getEmployeeResponse">
+<part name="empName" type="xsd:string"/>
+</message>
+
+
+
+<portType name="Employee_PortType">
+<operation name="getEmployeeDetails">
+<input message="tns:getEmployeeDetailsRequest"/>
+<output message="tns:getEmployeeDetailsResponse"/>
+</operation>
+</portType>
+
+
+
+<binding name="Employee_Binding" type="tns:Employee_PortType">
+<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+<operation name="getEmployee">
+<soap:operation soapAction="getEmployee"/>
+
+<input>
+<soap:body
+encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+namespace="urn:examples:employee"
+use="encoded"/>
+</input>
+
+<output>
+<soap:body
+encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+namespace="urn:examples:employee"
+use="encoded"/>
+</output>
+
+</operation>
+</binding>
+
+
+
+
+<service name="getEmployee">
+<documentation>WSDL File for EmployeeService</documentation>
+<port binding="tns:Employee_Binding" name="Employee_Port">
+<soap:address
+location="http://localhost:3003/getEmployee/" />
+</port>
+</service>
+
+
+
+</definitions>
